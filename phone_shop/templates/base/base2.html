@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导航侧栏</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+</head>
+<style type="text/css">
+    .pp{
+        text-align: center;
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar pp">
+                <li {% block active1 %}{% endblock %}><a href="/shopping_order/not_pay_order"><span class="sr-only">(current)</span>待付款订单</a></li>
+                <li {% block active2 %}{% endblock %}><a href="/shopping_order/all_order">待收货</a></li>
+{#                <li {% block active2 %}{% endblock %}><a href="/shopping_order/all_order">待收货</a></li>#}
+{#                <li {% block active2 %}{% endblock %}><a href="/shopping_order/all_order">待收货</a></li>#}
+{#                <li {% block active2 %}{% endblock %}><a href="/shopping_order/all_order">待收货</a></li>#}
+                <li {% block active3 %}{% endblock %}><a href="/shopping_order/order_record">订单历史记录</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block page1 %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

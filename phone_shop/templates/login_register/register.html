@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sign up</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <style>
+        body {
+            background-image: url("../../static/images/bg.jpg");
+        }
+        form {
+            background-color: #EEEEC7;
+        }
+    </style>
+    <script src="../../static/js/login_register/register.js"></script>
+</head>
+<body>
+<div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <form action="" method="post" style="margin-top: 70px;padding: 30px;">
+                    {% csrf_token %}
+                    <h3 class="text-center" >用户注册</h3>
+                    <div class="form-group" style="margin-top: 30px">
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="用户名">
+                        <p style="color: red" id="msg1"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="user_pwd" name="user_pwd" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="user_pwd1" name="user_pwd1" placeholder="再次输入密码">
+                        <p style="color: red" id="msg2"></p>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="ajax_btn" class="btn btn-primary form-control">注册</button>
+                    </div>
+                    <div class="form-group">
+                        <p class="text-right">以有账号？<a href="/login_register/login" class="a1">请登录</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

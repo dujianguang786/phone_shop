@@ -1,0 +1,52 @@
+{% include 'base/nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <link href="/static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.4.1-dist/js/bootstrap.min.js">
+    <script src="/static/js/login_register/edit_my_info.js"></script>
+</head>
+<body>
+<div class="container" style="margin-top: 70px">
+    <div class="row" style="text-align: center">
+        <form action="" method="post" style="padding: 20px">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h3>修改个人信息</h3></legend>
+                <label>
+                    姓名 <input type="text" name="user_name" id="user_name" value="{{ ret.0.user_name }}">
+                    <br>
+                    <span style="color: red" id="msg1">{{ msg1 }}</span>
+                </label><br><br>
+                <label>
+                    邮箱 <input type="email" name="user_email" id="user_email" value="{{ ret.0.user_email }}">
+                    <br>
+                    <span style="color: red" id="msg2">{{ msg2 }}</span>
+                </label><br><br>
+                <label>
+                    手机号 <input type="text" name="user_phone" id="user_phone" value="{{ ret.0.phone }}">
+                    <br>
+                    <span style="color: red" id="msg3">{{ msg3 }}</span>
+                </label><br><br>
+                <label>
+                    余额 <input type="text" style="background-color: whitesmoke" name="money" id="money" value="{{ ret.0.my_money }}" readonly>
+                    <br>
+                    <span style="color: red" id="msg3">{{ msg3 }}</span>
+                </label><br><br>
+
+{#                <label>#}
+{#                    默认收货人地址 <input type="text" name="user_addr" value="{{ addr1 }}" readonly>#}
+{#                    <br>#}
+{#                </label><br><br>#}
+
+                <button type="button" class="btn btn-info"><a href="/login_register/my_info">取消</a></button>
+                <button type="button" class="btn btn-success" id="ajax_btn">修改</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>

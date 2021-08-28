@@ -1,0 +1,5 @@
+问题分析:
+django.db.utils.IntegrityError: (1062, "Duplicate entry '2404905186@qq.com' for key 'login_register_userinfo.user_email'")
+    众所周知我们创建后台管理员时候是 没有设置手机号的
+    报这个错 就是告诉我们在数据库中已经存在一个管理员,且手机号为空,
+    我们再次创建管理员就会有手机号重复的现象存在从而报这个错

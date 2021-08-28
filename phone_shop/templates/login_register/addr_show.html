@@ -1,0 +1,89 @@
+{% extends 'base/base1.html' %}
+
+{% block active6 %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+    {% include 'base/nav.html' %}
+{#    <script src="../../static/js/login_register/addr_show.js"></script>#}
+{#    <script src="../../static/js/login_register/delete_addr.js"></script>#}
+    {% load static %}
+    <script src="{% static 'js/login_register/addr_show.js' %}"></script>
+    <script src="{% static 'static/js/login_register/delete_addr.js' %}"></script>
+
+    <button class="btn btn-warning"><a href="/login_register/add_addr">新增</a></button>
+    <h2 class="sub-header">收件人地址信息表</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="i-checks" id="check_all"/>全选
+                    </th>
+                    <th>序号</th>
+                    <th style="display: none">id</th>
+                    <th>地址</th>
+                    <th>邮编</th>
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>地址类型</th>
+                    <th colspan="2" style="text-align: center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="select_list">
+                {% for i in ret %}
+                <tr class="aa" draggable="true">
+                    <td>
+                        <input class="check_1" type="checkbox">
+                    </td>
+                    <td>{{ forloop.counter }}</td>
+                    <td style="display: none" class="c1">{{ i.id }}</td>
+                    <td>{{ i.addressee_address }}</td>
+                    <td>{{ i.address_postcode }}</td>
+                    <td>{{ i.addressee_name }}</td>
+                    <td>{{ i.addressee_phone }}</td>
+{#                    <td>#}
+{#                        <select name="is_default_address" id="">#}
+{#                            {% for key, value in i.addr_choice %}#}
+{#                                <option value="{{ key }}" disabled="disabled">{{ value }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </td>#}
+
+                    <td>{% if i.is_default_address == 1 %}
+                            默认地址
+                        {% else %}
+                            非默认地址
+                        {% endif %}
+                    </td>
+                    <td  style="text-align: center" id="tbody">
+
+                        <button class="btn btn-warning" type="button"><a href="/login_register/edit_addr/?id={{ i.id }}">编辑</a></button>
+                        <button class="btn btn-warning" type="button"><a href="/login_register/delete_addr/?id={{ i.id }}">删除</a></button>
+                        <button class="btn btn-warning" id="set" type="button"><a href="/login_register/addr_set/?id={{ i.id }}">默认地址设置</a></button>
+                    </td>
+                </tr>
+                {% empty %}
+                    <td colspan="8" style="text-align: center; background-color: snow"><h6><b>暂无数据</b></h6></td>
+                {% endfor %}
+                <tr>
+                    <td colspan="8" style=" background-color: snow">
+                        <input type="checkbox" class="i-checks" id="cancel"/>取消
+                        <input type="checkbox" class="i-checks" id="invert"/>反选
+                        <button class="btn btn-warning" id="delete" type="button">批量删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{#默认收货人地址 <select name="press_id">#}
+{#                    {% for press in press_data %}#}
+{#                        {% if book_obj.press == press %}#}
+{#                            <option selected value="{{ press.id }}">{{ press.press_name }}</option>#}
+{#                        {% else %}#}
+{#                            <option value="{{ press.id }}">{{ press.press_name }}</option>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                </select>#}

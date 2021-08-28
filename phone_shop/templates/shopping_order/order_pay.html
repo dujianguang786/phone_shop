@@ -1,0 +1,273 @@
+{% include 'base/nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gouwuche</title>
+    <link href="/static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <style>
+        .div1 {
+            margin-top: 15px;
+        }
+    </style>
+{#    够了付款，不够充值#}
+    <script src="../../static/js/shopping_order/select_1.js"></script>
+
+</head>
+<body>
+
+<div class="container" style="margin-top: 70px">
+    <div class="row">
+        <div class="col-md-7 col-md-offset-3" style="background-color: #cccccc;">
+            <h3 style="text-align: center">收件人地址信息</h3>
+            <hr>
+            <div>
+                收件人姓名:<span>{{ addr_detail.addressee_name }}</span>
+            </div>
+            <div style="margin-top: 10px">
+                收件人地址:<span>{{ addr_detail.addressee_address }}</span>
+            </div>
+            <div style="margin-top: 10px">
+                地址邮编:<span>{{ addr_detail.address_postcode }}</span>
+            </div>
+            <div style="margin-top: 10px">
+                收件人电话:<span>{{ addr_detail.addressee_phone }}</span>
+            </div>
+            <div style="margin-top: 10px">
+                支付方式: <span>{{ pay_static }}</span>
+            </div>
+            <div style="margin-top: 10px">
+                共计消费: <span>￥{{ money_sum }}</span>
+            </div>
+            <div style="margin-top: 10px;text-align: center">
+                <button type="button" class="btn btn-info"><a href="/shopping_order/not_pay_order">取消</a></button>
+                <button type="button" class="btn btn-info"><a href="/shopping_order/pay_money/{{ money_sum }}">确认支付</a></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-4 col-lg-offset-4" style="text-align: center; margin-top: 30px; background-color: rosybrown">
+            <h2>订单详情</h2>
+        </div>
+    </div>
+    <div class="row" style="text-align: center; margin-top: 20px; background-color: burlywood">
+        <div class="col-md-1">
+            <input type="checkbox" id="check_all"/>全选
+        </div>
+        <div class="col-md-1" style="display: none">
+            id
+        </div>
+        <div class="col-md-3">
+            商品图片/商品简介/商品价格
+        </div>
+        <div class="col-md-2">
+            手机颜色/存储容量
+        </div>
+        <div class="col-md-2">
+            数量
+        </div>
+        <div class="col-md-2">
+            总价
+        </div>
+        <div class="col-md-2">
+            支付状态
+        </div>
+    </div>
+
+    {% for order_detail in orderdetail_list %}
+{#        {% for order_detail in order_info.shoppingorderdetail_set.filter %}#}
+            <div class="row number1" style="margin-top: 20px; text-align: center; background-color: papayawhip; padding:20px 0;">
+                <div class="col-md-1" style="background-color: lightcyan; height: 80px; line-height:80px;">
+                    <input type="checkbox" class="check_1"/>
+                </div>
+                <input type="text" id="del_12"  style="display: none" value="{{ i.id }}">
+                <div class="col-md-1" style="display: none" id="id_1">{{ order_detail.id }}</div>
+                <div class="col-md-3" style="">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">
+                                <img src='../../{{ order_detail.colorid }}' id="img11" alt="" width="50%">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">
+                                <div>{{ order_detail.intro }}</div>
+                                <br>
+                                ￥<span class="num1">{{ order_detail.price }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" style="background-color: lightcyan">
+                    <div>
+                        {{ order_detail.color_name }}
+                    </div>
+                    <div>
+                        {{ order_detail.capacityid }}
+                    </div>
+                </div>
+                <div class="col-md-2" style="background-color: papayawhip" id="id123">
+                    <div>
+                        <button type="button" class="btn1">-</button>
+                        <span class="num2" id="number_1">{{ order_detail.buy_count }}</span>
+                        <button type="button" class="btn2">+</button>
+                    </div>
+                </div>
+                <div class="col-md-2" style="background-color: papayawhip" id="price">
+                    <div>
+                        ￥<span class="price" id="price_all">{{ order_detail.price_all }}</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="background-color: lightcyan;">
+                    <div>
+                        待支付
+                    </div>
+                </div>
+            </div>
+{#        {% endfor %}#}
+    {% endfor %}
+{#    <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+{#        <input type="checkbox" class="i-checks" id="cancel"/>取消#}
+{#        <input type="checkbox" class="i-checks" id="invert"/>反选#}
+{#        <button class="btn btn-warning" id="delete" type="button">删除</button>#}
+{##}
+{#    </div>#}
+
+
+</div>
+</body>
+</html>
+{#{% extends 'base/base2.html' %}#}
+{##}
+{#{% block active1 %}#}
+{#    class="active"#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    {% include 'base/nav.html' %}#}
+{#    <style>#}
+{#        .div1 {#}
+{#            margin-top: 15px;#}
+{#        }#}
+{#    </style>#}
+{#    <script src="../../static/js/shopping_order/select_1.js"></script>#}
+{#    <script src="../../static/js/shopping_order/delete_order.js"></script>#}
+{#    <script src="../../static/js/shopping_order/pay_money_sum.js"></script>#}
+{##}
+{#</head>#}
+{#<body>#}
+
+{#    <div class="container" style="margin-top: 70px">#}
+{#        <div class="row">#}
+{#            <div class="col-md-4 col-lg-offset-4" style="text-align: center; margin-top: 30px; background-color: rosybrown">#}
+{#                <h2>订单商品展示</h2>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row" style="text-align: center; margin-top: 20px; background-color: burlywood">#}
+{#            <div class="col-md-1">#}
+{#                <input type="checkbox" id="check_all"/>全选#}
+{#            </div>#}
+{#            <div class="col-md-1" style="display: none">#}
+{#                id#}
+{#            </div>#}
+{#            <div class="col-md-3">#}
+{#                商品图片/商品简介/商品价格#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                手机颜色/存储容量#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                数量#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                总价#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                支付状态#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        {% for order_info in ret1 %}#}
+{#            {% for order_detail in order_info.shoppingorderdetail_set.filter %}#}
+{#                <div class="row number1" style="margin-top: 20px; text-align: center; background-color: papayawhip; padding:20px 0;">#}
+{#                    <div class="col-md-1" style="background-color: lightcyan; height: 80px; line-height:80px;">#}
+{#                        <input type="checkbox" class="check_1"/>#}
+{#                    </div>#}
+    {#                <input type="text" id="del_12"  style="display: none" value="{{ i.id }}">#}
+{#                    <div class="col-md-1" style="display: none" id="id_1">{{ order_detail.id }}</div>#}
+{#                    <div class="col-md-3" style="">#}
+{#                        <div class="row">#}
+{#                            <div class="col-md-4">#}
+{#                                <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">#}
+{#                                    <img src='../../{{ order_detail.colorid }}' id="img11" alt="" width="50%">#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">#}
+{#                                    <div>{{ order_detail.intro }}</div>#}
+{#                                    <br>#}
+{#                                    ￥<span class="num1">{{ order_detail.price }}</span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-2" style="background-color: lightcyan">#}
+{#                        <div>#}
+{#                            {{ order_detail.color_name }}#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            {{ order_detail.capacityid }}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-2" style="background-color: papayawhip" id="id123">#}
+{#                        <div>#}
+{#                            <button type="button" class="btn1">-</button>#}
+{#                            <span class="num2" id="number_1">{{ order_detail.buy_count }}</span>#}
+{#                            <button type="button" class="btn2">+</button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-2" style="background-color: papayawhip" id="price">#}
+{#                        <div>#}
+{#                            ￥<span class="price" id="price_all">{{ order_detail.price_all }}</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-2" style="background-color: lightcyan;">#}
+{#                        <div>#}
+{#                            {% if order_info.pay_status.0.0 == 0 %}#}
+{#                                代支付#}
+{#                            {% else %}#}
+{#                                已支付#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
+{#        <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+{#            <input type="checkbox" class="i-checks" id="cancel"/>取消#}
+{#            <input type="checkbox" class="i-checks" id="invert"/>反选#}
+{#            <button class="btn btn-warning" id="delete" type="button">删除</button>#}
+{##}
+{#        </div>#}
+{#        <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+{#            支付方式:<select name="is_default_address" id="">#}
+{#                    <option value="0">余额</option>#}
+{#                    <option value="1">微信</option>#}
+{#                    <option value="2">支付宝</option>#}
+{#            </select>#}
+{##}
+{#        </div>#}
+{#        <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+{#            共计消费：￥<input type="text" id="pay_money" name="price11" value="">#}
+{#            <button class="btn btn-danger" id="affirm_order" type="button">结算</button>#}
+{#            <button class="btn btn-danger" id="affirm_order1" type="button">下单付款</button>#}
+{##}
+{#        </div>#}
+{##}
+{##}
+{#    </div>#}
+{#{% endblock %}#}

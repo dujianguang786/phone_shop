@@ -1,0 +1,41 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/shopping_show/index">首页</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-danger" type="button" style="margin-left: 20px;">
+                    <a href="/shopping_cart/cart_show">购物车<span class="badge">{% block number %}{% endblock %}</span></a>
+                </button>
+                <li style="margin-left: 20px;">
+                    <form action="/shopping_show/search/" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="name" value="iPhone" placeholder="iPhone" id="Search">
+                        <button type="submit" id="btn">search</button>
+                    </form>
+                </li>
+                <div style="margin-left: 20px;" class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login_register/my_info">个人中心</a></li>
+                        <li><a href="/login_register/edit_my_info">修改个人信息</a></li>
+                        <li><a href="/login_register/edit_pwd">修改个人密码</a></li>
+                        <li><a href="/login_register/change_money">余额充值</a></li>
+                        <li><a href="/login_register/addr_show">收件地址信息</a></li>
+                        <li><a href="/shopping_order/not_pay_order">订单详情</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/login_register/login">登录</a></li>
+                        <li><a href="/login_register/delete_user">注销账户</a></li>
+                        <li><a href="/login_register/logout">退出</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+    </div>
+</nav>

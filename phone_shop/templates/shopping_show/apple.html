@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+    {% include 'base/nav.html' %}
+    {% for name_list in page.object_list %}
+{#        {% for object_name in name_list.goodsrepertory_set.all %}#}
+            <div class="col-md-2" style="margin: 20px 15px; background-color: whitesmoke; width: 200px; height: 250px;">
+
+                <a href="/shopping_show/detail/?id={{ name_list.goods.id }}">
+                    <br>
+                    {#                        <img src="../../static/sjtp/meizu/魅族17 Pro 乌金.jpg" alt="" width="40%"><br>#}
+                    <img src='../../{{ name_list.goods_colors_picture.phone_picture_addr }}' alt="" width="100%"><br>
+                    {{ name_list.goods.goods_intro }}
+                    <br>
+                    价格：￥{{ name_list.goods_price }}
+
+                </a>
+
+            </div>
+{#        {% endfor %}#}
+    {% endfor %}
+{% endblock %}
+
+{#分页#}
+{% block page1 %}
+    {% if page.has_previous %}
+        <a href="/shopping_show/{{ goods_spdcies1 }}/{{ page.previous_page_number }}">&lt;上一页</a>
+    {% endif %}
+        {% for pindex in page.paginator.page_range %}
+            {% if pindex == page.number %}
+                {{ pindex }}
+            {% else %}
+                <a href="/shopping_show/{{ goods_spdcies1 }}/{{ pindex }}">{{ pindex }}</a>
+             {% endif %}
+        {% endfor %}
+    {% if page.has_next %}
+        <a href="/shopping_show/{{ goods_spdcies1 }}/{{ page.next_page_number }}">&gt;下一页</a>
+    {% endif %}
+{% endblock %}
+
+
+

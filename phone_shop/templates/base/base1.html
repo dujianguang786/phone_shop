@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>导航侧栏</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+</head>
+<style type="text/css">
+    .pp{
+        text-align: center;
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar pp">
+                <li {% block active1 %}{% endblock %}><a href="/login_register/my_info">个人中心<span class="sr-only">(current)</span></a></li>
+                <li {% block active2 %}{% endblock %}><a href="/login_register/edit_my_info">修改个人信息</a></li>
+                <li {% block active3 %}{% endblock %}><a href="/login_register/edit_pwd">修改个人密码</a></li>
+                <li {% block active4 %}{% endblock %}><a href="/login_register/change_money">余额充值</a></li>
+                <li {% block active5 %}{% endblock %}><a href="/login_register/delete_user">注销账户</a></li>
+                <li {% block active6 %}{% endblock %}><a href="/login_register/addr_show">收件地址信息</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block page1 %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

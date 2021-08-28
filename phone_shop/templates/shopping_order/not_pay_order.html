@@ -1,0 +1,146 @@
+{% extends 'base/base2.html' %}
+
+{% block active1 %}
+    class="active"
+{% endblock %}
+
+
+{% block content %}
+    {% include 'base/nav.html' %}
+    <style>
+        .div1 {
+            margin-top: 15px;
+        }
+    </style>
+    <script src="../../static/js/shopping_order/select_2.js"></script>
+    <script src="../../static/js/shopping_order/delete_info.js"></script>
+
+    {##}
+    {#</head>#}
+    {#<body>#}
+
+    <div class="container" style="margin-top: 70px">
+        <div class="row">
+            <div class="col-md-4 col-lg-offset-4"
+                 style="text-align: center; margin-top: 30px; background-color: rosybrown">
+                <h2>订单和订单商品详情展示</h2>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px; background-color: #b9def0">
+            <input type="checkbox" class="i-checks" id="cancel"/>取消
+            <input type="checkbox" class="i-checks" id="invert"/>反选
+            <input type="checkbox" id="check_all"/>全选
+            <button class="btn btn-warning" id="delete" type="button">删除</button>
+        </div>
+        <div class="row" style="text-align: center; margin-top: 20px; background-color: burlywood">
+            <div class="col-md-1" style="display: none">
+                id
+            </div>
+            <div class="col-md-3">
+                商品图片/商品简介/商品价格
+            </div>
+            <div class="col-md-2">
+                手机颜色/存储容量
+            </div>
+            <div class="col-md-2">
+                数量
+            </div>
+            <div class="col-md-2">
+                总价
+            </div>
+            <div class="col-md-2">
+                支付状态
+            </div>
+        </div>
+
+        {% if ret1 %}
+            {% for order_info in ret1 %}
+                <div class="row">
+                    <div class="col-md-2 delete_2" style="margin-top: 20px; text-align: center; background-color: #b9def0; padding:20px 0;">
+                        <div class="col-md-1" style="background-color: lightcyan; height: 80px; line-height:80px;">
+                            <input type="checkbox" class="check_1"/>
+                        </div>
+                        <span>订单： {{ forloop.counter }}</span>
+                        <span>总价： {{ order_info.trade_money }}</span>
+                        <span id="order" style="display: none" class="span">{{ order_info.id }}</span>
+                        <button type="button" class="btn btn-info"><a href="/shopping_order/pay_money_1/{{ order_info.trade_money }}/{{ order_info.id }}">确认支付</a></button>
+                    </div>
+                </div>
+
+                {% for order_detail in order_info.shoppingorderdetail_set.filter %}
+                    <div class="row number1" style="margin-top: 20px; text-align: center; background-color: papayawhip; padding:20px 0;">
+                        {#                <input type="text" id="del_12"  style="display: none" value="{{ i.id }}">#}
+                        <div class="col-md-1" style="display: none" id="id_1">{{ order_detail.id }}</div>
+                        <div class="col-md-3" style="">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">
+                                        <img src='../../{{ order_detail.colorid }}' id="img11" alt="" width="50%">
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="/shopping_show/detail/?id={{ order_detail.shop_id }}">
+                                        <div>{{ order_detail.intro }}</div>
+                                        <br>
+                                        ￥<span class="num1">{{ order_detail.price }}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="background-color: lightcyan">
+                            <div>
+                                {{ order_detail.color_name }}
+                            </div>
+                            <div>
+                                {{ order_detail.capacityid }}
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="background-color: papayawhip" id="id123">
+                            <div>
+                                <button type="button" class="btn1">-</button>
+                                <span class="num2" id="number_1">{{ order_detail.buy_count }}</span>
+                                <button type="button" class="btn2">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="background-color: papayawhip" id="price">
+                            <div>
+                                ￥<span class="price" id="price_all">{{ order_detail.price_all }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="background-color: lightcyan;">
+                            <div>
+                                {% if order_info.pay_status.0.0 == 0 %}
+                                    待支付
+                                {% else %}
+                                    已支付
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            {% for order_info in ret1 %}
+            {% empty %}
+                <h6><b>暂无下单</b></h6>
+            {% endfor %}
+        {% endif %}
+
+
+
+        {#        <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+        {#            支付方式:<select name="is_default_address" id="select_1">#}
+        {#                    <option value="0">余额</option>#}
+        {#                    <option value="1">微信</option>#}
+        {#                    <option value="2">支付宝</option>#}
+        {#            </select>#}
+        {##}
+        {#        </div>#}
+        {#    #}
+        {#        <div class="row" style="margin-top: 30px; background-color: #b9def0">#}
+        {#            共计消费：￥<input type="text" id="pay_money" name="price11" value="">#}
+        {#            <button class="btn btn-danger" id="affirm_order1" type="button">下单付款</button>#}
+        {##}
+        {#        </div>#}
+    </div>
+{% endblock %}
